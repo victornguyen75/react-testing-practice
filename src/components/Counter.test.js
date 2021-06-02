@@ -17,3 +17,31 @@ it("renders with test ID and extend-expect", () => {
 
   expect(headerElement.textContent).toBe("This is a counter");
 });
+
+it("checks for the counter to start at 0", () => {
+  const { getByTestId } = render(<Counter />);
+  const counterElement = getByTestId("counter");
+
+  expect(counterElement.textContent).toBe("0");
+});
+
+it("checks for the input value to start at 1", () => {
+  const { getByTestId } = render(<Counter />);
+  const inputElement = getByTestId("input");
+
+  expect(inputElement.value).toBe("1");
+});
+
+it("renders the add button", () => {
+  const { getByTestId } = render(<Counter />);
+  const addButton = getByTestId("add-button");
+
+  expect(addButton.textContent).toBe("+");
+});
+
+it("renders the subtract button", () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractButton = getByTestId("subtract-button");
+
+  expect(subtractButton.textContent).toBe("-");
+});
