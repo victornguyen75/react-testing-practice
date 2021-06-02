@@ -20,7 +20,7 @@ export default function Counter() {
         type="number"
         value={input}
         className="center-text"
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => setInput(parseInt(e.target.value, 10))}
       />
       <button
         data-testid="add-button"

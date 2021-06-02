@@ -77,3 +77,23 @@ it("subtracts from the counter", () => {
 
   expect(counterElement.textContent).toBe("-1");
 });
+
+it("changes the input value and adds to the counter", () => {
+  const { getByTestId } = render(<Counter />);
+  const addButton = getByTestId("add-button");
+  const counterElement = getByTestId("counter");
+  const inputElement = getByTestId("input");
+
+  expect(counterElement.textContent).toBe("0");
+  expect(inputElement.value).toBe("1");
+
+  fireEvent.change(inputElement, {
+    target: {
+      value: "625",
+    },
+  });
+  fireEvent.click(addButton);
+
+  expect(counterElement.textContent).toBe("625");
+  expect(inputElement.value).toBe("625");
+});
