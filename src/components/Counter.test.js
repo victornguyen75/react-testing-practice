@@ -1,46 +1,45 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import Counter from "./Counter";
-import "@testing-library/jest-dom/extend-expect";
+
+let getByTestId;
+
+beforeEach(() => {
+  const component = render(<Counter />);
+  getByTestId = component.getByTestId;
+});
 
 it("renders", () => {
-  render(<Counter />);
   const linkElement = screen.getByText(/this is a counter/i);
   expect(linkElement).toBeInTheDocument();
 });
 
-// requires extend-expect
 it("renders with test ID and extend-expect", () => {
   // const component = render(<Counter />);
   // const headerElement = component.getByTestId("header");
-  const { getByTestId } = render(<Counter />);
   const headerElement = getByTestId("header");
 
   expect(headerElement.textContent).toBe("This is a counter");
 });
 
 it("checks for the counter to start at 0", () => {
-  const { getByTestId } = render(<Counter />);
   const counterElement = getByTestId("counter");
 
   expect(counterElement.textContent).toBe("0");
 });
 
 it("renders the add button", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
 
   expect(addButton.textContent).toBe("+");
 });
 
 it("renders the subtract button", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
 
   expect(subtractButton.textContent).toBe("-");
 });
 
 it("changes the input value", () => {
-  const { getByTestId } = render(<Counter />);
   const inputElement = getByTestId("input");
 
   expect(inputElement.value).toBe("1");
@@ -55,7 +54,6 @@ it("changes the input value", () => {
 });
 
 it("adds to the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
   const counterElement = getByTestId("counter");
 
@@ -67,7 +65,6 @@ it("adds to the counter", () => {
 });
 
 it("subtracts from the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
   const counterElement = getByTestId("counter");
 
@@ -79,7 +76,6 @@ it("subtracts from the counter", () => {
 });
 
 it("changes the input value and adds to the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
   const counterElement = getByTestId("counter");
   const inputElement = getByTestId("input");
@@ -99,7 +95,6 @@ it("changes the input value and adds to the counter", () => {
 });
 
 it("changes the input value and subtracts from the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const subtractButton = getByTestId("subtract-button");
   const counterElement = getByTestId("counter");
   const inputElement = getByTestId("input");
@@ -119,7 +114,6 @@ it("changes the input value and subtracts from the counter", () => {
 });
 
 it("changes the input value, adds to the counter, and then subtracts from the counter", () => {
-  const { getByTestId } = render(<Counter />);
   const counterElement = getByTestId("counter");
   const inputElement = getByTestId("input");
   const addButton = getByTestId("add-button");
@@ -158,7 +152,6 @@ it("changes the input value, adds to the counter, and then subtracts from the co
 });
 
 it("checks the colors (via className) of the counter value", () => {
-  const { getByTestId } = render(<Counter />);
   const counterElement = getByTestId("counter");
   const inputElement = getByTestId("input");
   const addButton = getByTestId("add-button");
