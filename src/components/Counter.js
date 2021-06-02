@@ -9,7 +9,12 @@ export default function Counter() {
     <>
       <h2 data-testid="header">This is a counter</h2>
       <h3 data-testid="counter">{counter}</h3>
-      <button data-testid="subtract-button">-</button>
+      <button
+        data-testid="subtract-button"
+        onClick={() => setCounter(counter - input)}
+      >
+        -
+      </button>
       <input
         data-testid="input"
         type="number"
@@ -17,7 +22,12 @@ export default function Counter() {
         className="center-text"
         onChange={(e) => setInput(e.target.value)}
       />
-      <button data-testid="add-button">+</button>
+      <button
+        data-testid="add-button"
+        onClick={() => setCounter(counter + input)}
+      >
+        +
+      </button>
     </>
   );
 }
