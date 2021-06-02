@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Counter() {
-  return <h1>This is a counter</h1>;
+  return <h2 data-testid="header">This is a counter</h2>;
 }
