@@ -5,10 +5,22 @@ export default function Counter() {
   const [counter, setCounter] = useState(0);
   const [input, setInput] = useState(1);
 
+  const getColor = () => {
+    if (counter >= 100) {
+      return "green";
+    } else if (counter <= -100) {
+      return "red";
+    } else {
+      return;
+    }
+  };
+
   return (
     <>
       <h2 data-testid="header">This is a counter</h2>
-      <h3 data-testid="counter">{counter}</h3>
+      <h3 data-testid="counter" className={getColor()}>
+        {counter}
+      </h3>
       <button
         data-testid="subtract-button"
         onClick={() => setCounter(counter - input)}

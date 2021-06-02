@@ -156,3 +156,64 @@ it("changes the input value, adds to the counter, and then subtracts from the co
   expect(counterElement.textContent).toBe("30");
   expect(inputElement.value).toBe("5");
 });
+
+it("checks the colors (via className) of the counter value", () => {
+  const { getByTestId } = render(<Counter />);
+  const counterElement = getByTestId("counter");
+  const inputElement = getByTestId("input");
+  const addButton = getByTestId("add-button");
+  const subtractButton = getByTestId("subtract-button");
+
+  expect(counterElement.className).toBe("");
+
+  fireEvent.change(inputElement, {
+    target: {
+      value: 50,
+    },
+  });
+  fireEvent.click(addButton);
+
+  expect(counterElement.textContent).toBe("50");
+  expect(counterElement.className).toBe("");
+
+  fireEvent.click(addButton);
+
+  expect(counterElement.textContent).toBe("100");
+  expect(counterElement.className).toBe("green");
+
+  fireEvent.click(addButton);
+
+  expect(counterElement.textContent).toBe("150");
+  expect(counterElement.className).toBe("green");
+
+  fireEvent.click(addButton);
+
+  expect(counterElement.textContent).toBe("200");
+  expect(counterElement.className).toBe("green");
+
+  fireEvent.click(subtractButton);
+
+  expect(counterElement.textContent).toBe("150");
+  expect(counterElement.className).toBe("green");
+
+  fireEvent.change(inputElement, {
+    target: {
+      value: 150,
+    },
+  });
+
+  fireEvent.click(subtractButton);
+
+  expect(counterElement.textContent).toBe("0");
+  expect(counterElement.className).toBe("");
+
+  fireEvent.click(subtractButton);
+
+  expect(counterElement.textContent).toBe("-150");
+  expect(counterElement.className).toBe("red");
+
+  fireEvent.click(subtractButton);
+
+  expect(counterElement.textContent).toBe("-300");
+  expect(counterElement.className).toBe("red");
+});
