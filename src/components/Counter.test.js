@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import Counter from "./Counter";
 import "@testing-library/jest-dom/extend-expect";
 
@@ -25,13 +25,6 @@ it("checks for the counter to start at 0", () => {
   expect(counterElement.textContent).toBe("0");
 });
 
-it("checks for the input value to start at 1", () => {
-  const { getByTestId } = render(<Counter />);
-  const inputElement = getByTestId("input");
-
-  expect(inputElement.value).toBe("1");
-});
-
 it("renders the add button", () => {
   const { getByTestId } = render(<Counter />);
   const addButton = getByTestId("add-button");
@@ -44,4 +37,19 @@ it("renders the subtract button", () => {
   const subtractButton = getByTestId("subtract-button");
 
   expect(subtractButton.textContent).toBe("-");
+});
+
+it("changes the input value", () => {
+  const { getByTestId } = render(<Counter />);
+  const inputElement = getByTestId("input");
+
+  expect(inputElement.value).toBe("1");
+
+  fireEvent.change(inputElement, {
+    target: {
+      value: "125",
+    },
+  });
+
+  expect(inputElement.value).toBe("125");
 });

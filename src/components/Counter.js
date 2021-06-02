@@ -15,6 +15,7 @@ export default function Counter() {
         type="number"
         value={input}
         className="center-text"
+        onChange={(e) => setInput(e.target.value)}
       />
       <button data-testid="add-button">+</button>
     </>
